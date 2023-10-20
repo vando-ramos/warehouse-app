@@ -8,3 +8,7 @@
   City: <%= w.city %>
   Area: <%= w.area %> m2
 <% end %>
+
+<% if @warehouses.empty? %>
+  <p>There aren't registered warehouses</p>
+<% end %>

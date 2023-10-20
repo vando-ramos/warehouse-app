@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'user visits homepage' do
-  it 'and sees the application s name' do
+  it "and sees the application's name" do
     # Arrange
 
     # Act
@@ -20,6 +20,7 @@ describe 'user visits homepage' do
     visit('/')
 
     # Assert
+    expect(page).not_to have_content("There aren't registered warehouses")
     expect(page).to have_content('Rio')
     expect(page).to have_content('Code: SDU')
     expect(page).to have_content('City: Rio de Janeiro')
@@ -29,5 +30,15 @@ describe 'user visits homepage' do
     expect(page).to have_content('Code: MCZ')
     expect(page).to have_content('City: Maceio')
     expect(page).to have_content('Area: 50000 m2')
+  end
+
+  it "and there aren't registered warehouses" do
+    # Arrange
+
+    # Act
+    visit('/')
+
+    # Assert
+    expect(page).to have_content("There aren't registered warehouses")
   end
 end
