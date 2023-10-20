@@ -1,1 +1,10 @@
-'Warehouses and Stock'
+<h1>Warehouses and Stock</h1>
+
+<h2>Warehouses</h2>
+
+<% @warehouses.each do |w| %>
+  <%= w.name %>
+  Code: <%= w.code %>
+  City: <%= w.city %>
+  Area: <%= w.area %> m2
+<% end %>
