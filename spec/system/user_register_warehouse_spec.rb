@@ -40,4 +40,18 @@ describe 'User register a warehouse' do
     expect(page).to have_content('RIO')
     expect(page).to have_content('50000 m2')
   end
+
+  it 'with incomplete data' do
+    # Arrange
+
+    # Act
+    visit root_path
+    click_on 'Register Warehouse'
+    fill_in 'Name', with: ''
+    fill_in 'Code', with: ''
+    click_on 'Send'
+
+    # Assert
+    expect(page).to have_content('Unregistered warehouse')
+  end
 end
