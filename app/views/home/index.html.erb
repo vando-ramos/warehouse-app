@@ -4,9 +4,10 @@
 
 <% @warehouses.each do |w| %>
   <%= link_to w.name, warehouse_path(w.id) %>
-  Code: <%= w.code %>
-  City: <%= w.city %>
-  Area: <%= w.area %> m2
+
+  <strong>Code:</strong> <%= w.code %>
+  <strong>City:</strong> <%= w.city %>
+  <strong>Area:</strong> <%= w.area %> m2
 <% end %>
 
 <% if @warehouses.empty? %>
