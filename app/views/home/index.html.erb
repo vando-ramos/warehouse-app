@@ -3,7 +3,7 @@
 <h2>Warehouses</h2>
 
 <% @warehouses.each do |w| %>
-  <%= w.name %>
+  <%= link_to w.name, warehouse_path(w.id) %>
   Code: <%= w.code %>
   City: <%= w.city %>
   Area: <%= w.area %> m2
