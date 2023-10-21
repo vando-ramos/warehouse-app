@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  resources :warehouses, only: %i[ show ]
+  resources :warehouses, only: %i[ show new create ]
 end
