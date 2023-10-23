@@ -3,9 +3,9 @@ require 'rails_helper'
 describe 'User sees details of a warehouse' do 
   it 'and sees additional information' do
     # Arrange
-    Warehouse.create(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
-                    address: 'Av do Aeroporto, 1000', cep: '15000-000',
-                    description: 'Warehouse for international cargo')
+    Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
+                      address: 'Av do Aeroporto, 1000', cep: '15000-000',
+                      description: 'Warehouse for international cargo')
 
     # Act
     visit(root_path)
@@ -24,8 +24,8 @@ describe 'User sees details of a warehouse' do
   it 'and return to homepage' do 
     # Arrange
     w = Warehouse.new(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
-                    address: 'Av do Aeroporto, 1000', cep: '15000-000',
-                    description: 'Warehouse for international cargo')
+                      address: 'Av do Aeroporto, 1000', cep: '15000-000',
+                      description: 'Warehouse for international cargo')
     w.save() # 'm = Model.new + m.save' is the same as 'Model.create'
 
     # Act
