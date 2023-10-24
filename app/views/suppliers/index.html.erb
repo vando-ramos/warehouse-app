@@ -1,0 +1,22 @@
+<h1>Suppliers</h1>
+
+<% if @suppliers.any? %>
+  <table>
+  <thead>
+    <tr>
+      <th>Marca</th>
+      <th>Localization</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @suppliers.each do |s| %>
+    <tr>
+      <td><%= link_to s.brand_name %></td>
+      <td><%= s.city %> - <%= s.state %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% else %>
+  <p>There aren't registered suppliers</p>
+<% end %>

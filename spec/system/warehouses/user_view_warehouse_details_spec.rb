@@ -8,7 +8,7 @@ describe 'User sees details of a warehouse' do
                       description: 'Warehouse for international cargo')
 
     # Act
-    visit(root_path)
+    visit root_path
     click_on 'Aeroporto SP'
 
     # Assert
@@ -21,15 +21,14 @@ describe 'User sees details of a warehouse' do
     expect(page).to have_content('Description: Warehouse for international cargo')
   end
 
-  it 'and return to homepage' do 
+  it 'and return to homepage' do
     # Arrange
-    w = Warehouse.new(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
+    Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
                       address: 'Av do Aeroporto, 1000', cep: '15000-000',
                       description: 'Warehouse for international cargo')
-    w.save() # 'm = Model.new + m.save' is the same as 'Model.create'
 
     # Act
-    visit(root_path)
+    visit root_path
     click_on 'Aeroporto SP'
     click_on 'Go Back'
 

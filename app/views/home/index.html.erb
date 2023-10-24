@@ -6,13 +6,12 @@
   <p>
     <%= I18n.localize Date.today %>
   </p>
-
   <div>
     <%= link_to 'Register Warehouse', new_warehouse_path %>
   </div>
   <% @warehouses.each do |w| %>
     <div>
-      <h3><%= link_to w.name, warehouse_path(w.id) %></h3>
+      <h3><%= link_to w.name, w %></h3>
       <dl>
         <dt><strong>Code:</strong></dt>
         <dd><%= w.code %></dd>

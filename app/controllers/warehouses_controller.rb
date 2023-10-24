@@ -1,17 +1,17 @@
 class WarehousesController < ApplicationController
-  before_action :set_warehouse, only: %i[ show edit update destroy ]
+  before_action :set_warehouse, only: %i[show edit update destroy]
 
   def show
   end
 
   def new
-    @warehouse = Warehouse.new  
+    @warehouse = Warehouse.new
   end
 
   def create
     @warehouse = Warehouse.new(warehouse_params)
     
-    if @warehouse.save!()
+    if @warehouse.save()
       redirect_to root_path, notice: 'Warehouse registered successfully!'
     else
       flash.now.notice = 'Unregistered warehouse!'

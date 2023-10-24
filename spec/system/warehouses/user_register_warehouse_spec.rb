@@ -49,6 +49,7 @@ describe 'User register a warehouse' do
     click_on 'Register Warehouse'
     fill_in 'Name', with: ''
     fill_in 'Code', with: ''
+    fill_in 'City', with: ''
     click_on 'Send'
 
     # Assert
