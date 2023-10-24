@@ -4,14 +4,14 @@
   <table>
   <thead>
     <tr>
-      <th>Marca</th>
+      <th>Brand name</th>
       <th>Localization</th>
     </tr>
   </thead>
   <tbody>
     <% @suppliers.each do |s| %>
     <tr>
-      <td><%= link_to s.brand_name %></td>
+      <td><%= link_to s.brand_name, s %></td>
       <td><%= s.city %> - <%= s.state %></td>
     </tr>
     <% end %>

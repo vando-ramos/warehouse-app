@@ -1,0 +1,26 @@
+<h1>Brand Name: <%= @supplier.brand_name %></h1>
+
+<table border='1'>
+  <thead>
+    <tr>
+      <th>Corporate Name</th>
+      <th>Brand Name</th>
+      <th>NIF</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @supplier.corporate_name %></td>
+      <td><%= @supplier.brand_name %></td>
+      <td><%= @supplier.nif %></td>
+      <td><%= @supplier.address %></td>
+      <td><%= @supplier.city %></td>
+      <td><%= @supplier.state %></td>
+      <td><%= @supplier.email %></td>      
+    </tr>
+  </tbody>
+</table>
