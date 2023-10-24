@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 describe 'User sees details of a supplier' do
-  it 'and sees additional information' do
+  it 'from the supplier index' do
     # Arrange
     Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', nif: '123456789',
                     address: 'Beers street, 51', city: 'Springfield', state: 'OR', email: 'duff@duff.com')
 
     # Act
-    visit suppliers_path
+    visit root_path
+    click_on 'Suppliers'
     click_on 'Duff'
 
     # Assert
@@ -18,5 +19,20 @@ describe 'User sees details of a supplier' do
     expect(page).to have_content('Springfield')
     expect(page).to have_content('OR')
     expect(page).to have_content('duff@duff.com')
+  end
+
+  it 'and return to homepage' do
+    # Arrange
+    Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', nif: '123456789',
+                    address: 'Beers street, 51', city: 'Springfield', state: 'OR', email: 'duff@duff.com')
+
+    # Act
+    visit root_path
+    click_on 'Suppliers'
+    click_on 'Duff'
+    click_on 'Home'
+
+    # Assert
+    expect(current_path).to eq(root_path)
   end
 end
