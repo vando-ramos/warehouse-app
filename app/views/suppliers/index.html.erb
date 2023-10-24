@@ -1,7 +1,9 @@
 <h1>Suppliers</h1>
 
+<p><%= link_to 'Register Supplier', new_supplier_path %></p>
+
 <% if @suppliers.any? %>
-  <table>
+  <table border='1'>
   <thead>
     <tr>
       <th>Brand name</th>
@@ -20,7 +22,3 @@
 <% else %>
   <p>There aren't registered suppliers</p>
 <% end %>
-
-<div>
-  <%= link_to 'Home', root_path %>
-</div>

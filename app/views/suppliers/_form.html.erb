@@ -1,0 +1,33 @@
+<%= form_with model: @supplier do |s| %>
+  <div>
+    <%= s.label :corporate_name, 'Corporate Name' %>
+    <%= s.text_field :corporate_name %>
+  </div>  
+  <div>
+    <%= s.label :brand_name, 'Brand Name' %>
+    <%= s.text_field :brand_name %>
+  </div>
+  <div>    
+    <%= s.label :nif, 'NIF' %>
+    <%= s.text_field :nif %>
+  </div>
+  <div>
+    <%= s.label :address %>
+    <%= s.text_field :address %>
+  </div>
+  <div>
+    <%= s.label :city %>
+    <%= s.text_field :city %>
+  </div>
+  <div>
+    <%= s.label :state %>
+    <%= s.text_field :state %>
+  </div>
+  <div>
+    <%= s.label :email %>
+    <%= s.email_field :email %>
+  </div>
+  <div>
+    <%= s.submit 'Send' %>
+  </div>
+<% end %>
