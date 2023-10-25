@@ -10,13 +10,13 @@ class WarehousesController < ApplicationController
 
   def create
     @warehouse = Warehouse.new(warehouse_params)
-    
+
     if @warehouse.save()
       redirect_to root_path, notice: 'Warehouse registered successfully!'
     else
       flash.now.notice = 'Unregistered warehouse!'
       render 'new'
-    end    
+    end
   end
 
   def edit
@@ -24,7 +24,7 @@ class WarehousesController < ApplicationController
 
   def update
     if @warehouse.update(warehouse_params)
-      redirect_to warehouse_path(@warehouse), notice: 'Warehouse updated successfully'
+      redirect_to warehouse_path(@warehouse), notice: 'Warehouse updated successfully!'
     else
       flash.now.notice = 'Unable to update the warehouse!'
       render 'edit'
@@ -33,7 +33,7 @@ class WarehousesController < ApplicationController
 
   def destroy
     @warehouse.destroy
-    redirect_to root_path, notice: 'Warehouse deleted successfully'
+    redirect_to root_path, notice: 'Warehouse deleted successfully!'
   end
 
   private

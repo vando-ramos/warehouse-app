@@ -1,5 +1,5 @@
 class SuppliersController < ApplicationController
-  before_action :set_supplier, only: %i[show]
+  before_action :set_supplier, only: %i[show edit update]
 
   def index
     @suppliers = Supplier.all
@@ -20,6 +20,18 @@ class SuppliersController < ApplicationController
     else
       flash.now.notice = 'Unregistered supplier!'
       render 'new'
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @supplier.update(supplier_params)
+      redirect_to supplier_path(@supplier), notice: 'Supplier updated successfully!'
+    else
+      flash.now.notice = 'Unable to update the supplier!'
+      render 'edit'
     end
   end
 
