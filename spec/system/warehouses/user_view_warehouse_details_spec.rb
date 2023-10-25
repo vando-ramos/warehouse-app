@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User sees details of a warehouse' do 
+describe 'User sees details of a warehouse' do
   it 'and sees additional information' do
     # Arrange
     Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
@@ -30,7 +30,7 @@ describe 'User sees details of a warehouse' do
     # Act
     visit root_path
     click_on 'Aeroporto SP'
-    click_on 'Go Back'
+    click_on 'Home'
 
     # Assert
     expect(current_path).to eq(root_path)

@@ -4,7 +4,7 @@ class SuppliersController < ApplicationController
   def index
     @suppliers = Supplier.all
   end
-  
+
   def show
   end
 
@@ -13,9 +13,14 @@ class SuppliersController < ApplicationController
   end
 
   def create
-    @warehouse = Supplier.new(supplier_params)
-    @warehouse.save()
-    redirect_to suppliers_path
+    @supplier = Supplier.new(supplier_params)
+
+    if @supplier.save()
+      redirect_to suppliers_path, notice: 'Supplier registered successfully!'
+    else
+      flash.now.notice = 'Unregistered supplier!'
+      render 'new'
+    end
   end
 
   private
