@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'User sees details of a supplier' do
   it 'from the supplier index' do
     # Arrange
-    Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', nif: '123456789',
+    Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', registration_number: '123456789',
                     address: 'Beers street, 51', city: 'Springfield', state: 'OR', email: 'duff@duff.com')
 
     # Act
@@ -23,7 +23,7 @@ describe 'User sees details of a supplier' do
 
   it 'and return to homepage' do
     # Arrange
-    Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', nif: '123456789',
+    Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', registration_number: '123456789',
                     address: 'Beers street, 51', city: 'Springfield', state: 'OR', email: 'duff@duff.com')
 
     # Act

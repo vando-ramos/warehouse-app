@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'User edits a supplier' do
   it 'from the details page' do
     # Arrange
-    Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', nif: '123456789',
+    Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', registration_number: '123456789',
                     address: 'Beers street, 51', city: 'Springfield', state: 'OR', email: 'duff@duff.com')
 
     # Act
@@ -16,7 +16,7 @@ describe 'User edits a supplier' do
     expect(page).to have_content('Edit Supplier')
     expect(page).to have_field('Corporate Name', with: 'Duff ltda')
     expect(page).to have_field('Brand Name', with: 'Duff')
-    expect(page).to have_field('NIF', with: '123456789')
+    expect(page).to have_field('Registration Number', with: '123456789')
     expect(page).to have_field('Address', with: 'Beers street, 51')
     expect(page).to have_field('City', with: 'Springfield')
     expect(page).to have_field('State', with: 'OR')
@@ -25,7 +25,7 @@ describe 'User edits a supplier' do
 
   it 'successfully' do
     # Arrange
-    Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', nif: '123456789',
+    Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', registration_number: '123456789',
                     address: 'Beers street, 51', city: 'Springfield', state: 'OR', email: 'duff@duff.com')
 
     # Act
@@ -35,7 +35,7 @@ describe 'User edits a supplier' do
     click_on 'Edit'
     fill_in 'Corporate Name', with: 'Duff ltda'
     fill_in 'Brand Name', with: 'Duff'
-    fill_in 'NIF', with: '123456789'
+    fill_in 'Registration Number', with: '123456789'
     fill_in 'Address', with: 'Beers street, 51'
     fill_in 'City', with: 'Springfield'
     fill_in 'State', with: 'OR'
@@ -55,7 +55,7 @@ describe 'User edits a supplier' do
 
   it 'and keeps the required fields' do
     # Arrange
-    Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', nif: '123456789',
+    Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', registration_number: '123456789',
                     address: 'Beers street, 51', city: 'Springfield', state: 'OR', email: 'duff@duff.com')
 
     # Act
@@ -65,7 +65,7 @@ describe 'User edits a supplier' do
     click_on 'Edit'
     fill_in 'Corporate Name', with: ''
     fill_in 'Brand Name', with: ''
-    fill_in 'NIF', with: ''
+    fill_in 'Registration Number', with: ''
     click_on 'Send'
 
     # Assert

@@ -5,7 +5,7 @@
     <tr>
       <th>Corporate Name</th>
       <th>Brand Name</th>
-      <th>NIF</th>
+      <th>Registration Number</th>
       <th>Address</th>
       <th>City</th>
       <th>State</th>
@@ -16,13 +16,13 @@
     <tr>
       <td><%= @supplier.corporate_name %></td>
       <td><%= @supplier.brand_name %></td>
-      <td><%= @supplier.nif %></td>
+      <td><%= @supplier.registration_number %></td>
       <td><%= @supplier.address %></td>
       <td><%= @supplier.city %></td>
       <td><%= @supplier.state %></td>
-      <td><%= @supplier.email %></td>      
+      <td><%= @supplier.email %></td>
     </tr>
   </tbody>
 </table>
 
-<p><%= link_to 'Edit', edit_supplier_path %></p>
+<p><%= link_to 'Edit', edit_supplier_path(@supplier) %></p>

@@ -16,10 +16,10 @@ describe 'User sees suppliers' do
 
   it 'successfully' do
     # Arrange
-    Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', nif: '123456789',
+    Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', registration_number: '123456789',
                     address: 'Beers street, 51', city: 'Springfield', state: 'OR', email: 'duff@duff.com')
 
-    Supplier.create!(corporate_name: 'Umbrella Corporation', brand_name: 'Mr-x', nif: '987654321',
+    Supplier.create!(corporate_name: 'Umbrella Corporation', brand_name: 'Mr-x', registration_number: '987654321',
                     address: 'Raccoon Avenue, 900', city: 'Raccoon', state: 'CA', email: 'umbrella@umbrella.com')
     # Act
     visit root_path
@@ -39,7 +39,7 @@ describe 'User sees suppliers' do
 
     # Act
     visit root_path
-    click_on 'Suppliers' 
+    click_on 'Suppliers'
 
     # Assert
     expect(page).to have_content("There aren't registered suppliers")
