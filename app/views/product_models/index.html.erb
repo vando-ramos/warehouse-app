@@ -1,0 +1,24 @@
+<h1>Product Models</h1>
+
+<% if @product_models.any? %>
+  <table border='1'>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>SKU</th>
+        <th>Supplier</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @product_models.each do |pm| %>
+      <tr>
+        <td><%= pm.name %></td>
+        <td><%= pm.sku %></td>
+        <td><%= pm.supplier.brand_name %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>There aren't registered product models!</p>
+<% end %>
