@@ -1,5 +1,7 @@
 <h1>Product Models</h1>
 
+<p><%= link_to 'Register Product Model', new_product_model_path %></p>
+
 <% if @product_models.any? %>
   <table border='1'>
     <thead>
@@ -12,7 +14,7 @@
     <tbody>
       <% @product_models.each do |pm| %>
       <tr>
-        <td><%= pm.name %></td>
+        <td><%= link_to pm.name, pm %></td>
         <td><%= pm.sku %></td>
         <td><%= pm.supplier.brand_name %></td>
       </tr>

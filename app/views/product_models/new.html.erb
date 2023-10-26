@@ -1,0 +1,35 @@
+<h1>Register Product Model</h1>
+
+<%= form_with model:@product_model do |pm| %>
+  <div>
+    <%= pm.label :name %>
+    <%= pm.text_field :name %>
+  </div>
+  <div>
+    <%= pm.label :weight %>
+    <%= pm.number_field :weight %>
+  </div>
+  <div>
+    <%= pm.label :width %>
+    <%= pm.number_field :width %>
+  </div>
+  <div>
+    <%= pm.label :height %>
+    <%= pm.number_field :height %>
+  </div>
+  <div>
+    <%= pm.label :depth %>
+    <%= pm.number_field :depth %>
+  </div>
+  <div>
+    <%= pm.label :sku, 'SKU' %>
+    <%= pm.text_field :sku %>
+  </div>
+  <div>
+    <%= pm.label :supplier_id %>
+    <%= pm.collection_select :supplier_id, @suppliers, :id, :brand_name %>
+  </div>
+  <div>
+    <p><%= pm.submit 'Send' %></p>
+  </div>
+<% end %>
