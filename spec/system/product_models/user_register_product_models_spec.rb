@@ -7,6 +7,10 @@ describe 'User register a product model' do
                                 registration_number: '123456789', address: 'Samsung Street, 100',
                                 city: 'Samsung City', state: 'SC', email: 'samsung@samsung.com')
 
+    supplier = Supplier.create!(corporate_name: 'Xiaomi ltda', brand_name: 'Xiaomi',
+                                registration_number: '111222333', address: 'China Av, 1000',
+                                city: 'China Town', state: 'CT', email: 'xiaomi@xiaomi.com')
+
     # Act
     visit root_path
     click_on 'Product Models'
@@ -27,5 +31,23 @@ describe 'User register a product model' do
     expect(page).to have_content('Dimension: 6cm x 12cm x 2cm')
     expect(page).to have_content('SKU: CP-SAM-321')
     expect(page).to have_content('Supplier: Samsung')
+  end
+
+  it 'and must fill in all fields' do
+    # Arrange
+    Supplier.create!(corporate_name: 'Xiaomi ltda', brand_name: 'Xiaomi',
+                    registration_number: '111222333', address: 'China Av, 1000',
+                    city: 'China Town', state: 'CT', email: 'xiaomi@xiaomi.com')
+
+    # Act
+    visit root_path
+    click_on 'Product Models'
+    click_on 'Register Product Model'
+    fill_in 'Name', with: ''
+    fill_in 'SKU', with: ''
+    click_on 'Send'
+
+    # Assert
+    expect(page).to have_content('Unable to register product model')
   end
 end

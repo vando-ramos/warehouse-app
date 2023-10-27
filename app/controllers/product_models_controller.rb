@@ -16,7 +16,8 @@ class ProductModelsController < ApplicationController
     if @product_model.save()
       redirect_to @product_model, notice: 'Product model registered successfully!'
     else
-      flash.now.notice = 'Unregistered product model!'
+      @suppliers = Supplier.all
+      flash.now.notice = 'Unable to register product model!'
       render 'new'
     end
   end
