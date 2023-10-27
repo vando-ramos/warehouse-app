@@ -15,11 +15,18 @@
       <nav>
         <%= link_to 'Home', root_path %> |
         <%= link_to 'Suppliers', suppliers_path %> |
-        <%= link_to 'Product Models', product_models_path %>
+        <%= link_to 'Product Models', product_models_path %> |
+        <% if user_signed_in? %>
+          <%= current_user.email %>
+          <%= link_to 'Sign out', root_path %>
+        <% else %>
+          <%= link_to 'Sign in', new_user_session_path %>
+        <% end %>
       </nav>
     </header>
     <main>
       <div>
+        <p><%= alert %></p>
         <p><%= notice %></p>
       </div>
       
