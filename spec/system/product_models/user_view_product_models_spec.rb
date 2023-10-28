@@ -1,10 +1,25 @@
 require 'rails_helper'
 
 describe 'User sees product models' do
-  it 'from menu' do
+  it 'if authenticated' do
     # Arrange
 
     # Act
+    visit root_path
+    within('nav') do
+      click_on 'Product Models'
+    end
+
+    # Assert
+    expect(current_path).to eq(new_user_session_path)
+  end
+
+  it 'from menu' do
+    # Arrange
+    user = User.create!(name: 'User', email: 'user@email.com', password: '123456')
+
+    # Act
+    login_as(user)
     visit root_path
     within('nav') do
       click_on 'Product Models'
@@ -16,6 +31,8 @@ describe 'User sees product models' do
 
   it 'successfully' do
     # Arrange
+    user = User.create!(name: 'User', email: 'user@email.com', password: '123456')
+
     supplier = Supplier.create!(corporate_name: 'Samsung ltda', brand_name: 'Samsung',
                                 registration_number: '123456789', address: 'Samsung Street, 100',
                                 city: 'Samsung City', state: 'SC', email: 'samsung@samsung.com')
@@ -27,6 +44,7 @@ describe 'User sees product models' do
                         depth: '20', sku: 'NB-SAM-123', supplier: supplier)
 
     # Act
+    login_as(user)
     visit root_path
     within('nav') do
       click_on 'Product Models'
@@ -43,8 +61,10 @@ describe 'User sees product models' do
 
   it "and there aren't registered product models" do
     # Arrange
+    user = User.create!(name: 'User', email: 'user@email.com', password: '123456')
 
     # Act
+    login_as(user)
     visit root_path
     within('nav') do
       click_on 'Product Models'

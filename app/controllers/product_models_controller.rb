@@ -1,5 +1,6 @@
 class ProductModelsController < ApplicationController
   before_action :set_product_model, only: %i[show]
+  before_action :authenticate_user!, only: %i[index]
 
   def index
     @product_models = ProductModel.all
