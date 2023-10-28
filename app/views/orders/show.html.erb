@@ -1,0 +1,15 @@
+<h1>Orders</h1>
+
+<dl>
+  <dt>Destination Warehouse:</dt>
+  <dd><%= @order.warehouse.name %></dd>
+
+  <dt>Supplier:</dt>
+  <dd><%= @order.supplier.corporate_name %></dd>
+
+  <dt>Responsible User:</dt>
+  <dd><%= @order.user.name %> | <%= @order.user.email %></dd>
+
+  <dt>Expected delivery date:</dt>
+  <dd><%= @order.expected_delivery_date %></dd>
+</dl>
