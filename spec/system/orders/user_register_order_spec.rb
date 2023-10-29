@@ -31,6 +31,8 @@ describe 'User register an order' do
     Supplier.create!(corporate_name: 'Duff ltda', brand_name: 'Duff', registration_number: '987654321',
                     address: 'Beers street, 51', city: 'Springfield', state: 'OR', email: 'duff@duff.com')
 
+    allow(SecureRandom).to receive(:alphanumeric).and_return('ABCD1234')
+
     # Act
     login_as(user)
     visit root_path
@@ -42,6 +44,7 @@ describe 'User register an order' do
 
     # Assert
     expect(page).to have_content('Order registered successfully')
+    expect(page).to have_content('Order ABCD1234')
     expect(page).to have_content('Destination Warehouse: GRU - Aeroporto SP')
     expect(page).to have_content('Supplier: Samsung ltda')
     expect(page).to have_content('Responsible User: Dino - dino@email.com')
