@@ -22,6 +22,55 @@ RSpec.describe Order, type: :model do
       # Assert
       expect(result).to be(true)
     end
+
+    it 'expected delivery date must be mandatory' do
+      # Arrange
+      order = Order.new(expected_delivery_date: '')
+
+      # Act
+      order.valid?
+      result = order.errors.include?(:expected_delivery_date)
+
+      # Assert
+      expect(result).to be(true)
+    end
+
+    it 'expected delivery date must be a future date' do
+      # Arrange
+      order = Order.new(expected_delivery_date: 1.day.ago)
+
+      # Act
+      order.valid?
+      result = order.errors.include?(:expected_delivery_date)
+
+      # Assert
+      expect(result).to be(true)
+      expect(order.errors[:expected_delivery_date]).to include('date must be in the future')
+    end
+
+    it "expected delivery date can't be the same as today" do
+      # Arrange
+      order = Order.new(expected_delivery_date: Date.today)
+
+      # Act
+      order.valid?
+      result = order.errors.include?(:expected_delivery_date)
+
+      # Assert
+      expect(result).to be(true)
+      expect(order.errors[:expected_delivery_date]).to include('date must be in the future')
+    end
+
+    it "expected delivery date must be equal to or greater than tomorrow" do
+      # Arrange
+      order = Order.new(expected_delivery_date: 1.day.from_now)
+
+      # Act
+      order.valid?
+
+      # Assert
+      expect(order.errors.include?(:expected_delivery_date)).to be(false)
+    end
   end
 
   describe 'Generate a random code' do
