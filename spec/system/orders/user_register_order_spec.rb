@@ -14,7 +14,7 @@ describe 'User register an order' do
 
   it 'successfully' do
     # Arrange
-    user = User.create!(name: 'User', email: 'user@email.com', password: '123456')
+    user = User.create!(name: 'Dino', email: 'dino@email.com', password: '123456')
 
     warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
                                   address: 'Av do Aeroporto, 1000', cep: '15000-000',
@@ -35,17 +35,17 @@ describe 'User register an order' do
     login_as(user)
     visit root_path
     click_on 'Register Order'
-    select warehouse.name, from: 'Destination Warehouse'
+    select 'GRU - Aeroporto SP', from: 'Destination Warehouse'
     select supplier.corporate_name, from: 'Supplier'
-    fill_in 'Expected delivery date', with: '2023-12-15'
+    fill_in 'Expected Delivery Date', with: '2023-12-15'
     click_on 'Save'
 
     # Assert
     expect(page).to have_content('Order registered successfully')
-    expect(page).to have_content('Destination Warehouse: Aeroporto SP')
+    expect(page).to have_content('Destination Warehouse: GRU - Aeroporto SP')
     expect(page).to have_content('Supplier: Samsung ltda')
-    expect(page).to have_content('Responsible User: User | user@email.com')
-    expect(page).to have_content('Expected delivery date: 2023-12-15')
+    expect(page).to have_content('Responsible User: Dino - dino@email.com')
+    expect(page).to have_content('Expected Delivery Date: 2023-12-15')
     expect(page).not_to have_content('Porto Santos')
     expect(page).not_to have_content('Duff ltda')
   end

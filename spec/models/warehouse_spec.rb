@@ -9,10 +9,8 @@ RSpec.describe Warehouse, type: :model do
                                   address: 'Unit test, 1', cep: '15000-000', description: 'Unit test')
 
         # Act
-        # result = warehouse.valid?
 
         # Assert
-        # expect(result).to eq false
         expect(warehouse).not_to be_valid
       end
     end
@@ -26,11 +24,22 @@ RSpec.describe Warehouse, type: :model do
                                           address: 'Test, 2', cep: '25000-000', description: 'Test')
 
       # Act
-      # result = second_warehouse.valid?
 
       # Assert
-      # expect(result).to eq false
       expect(second_warehouse).not_to be_valid
+    end
+  end
+
+  describe '#full_description' do
+    it 'shows name and code' do
+      # Arrange
+      w = Warehouse.new(name: 'Rio Grande do Sul', code: 'RGS')
+
+      # Act
+      result = w.full_description()
+
+      # Assert
+      expect(result).to eq('RGS - Rio Grande do Sul')
     end
   end
 end

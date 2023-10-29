@@ -9,6 +9,7 @@ describe 'user visits homepage' do
 
     # Assert
     expect(page).to have_content('Warehouses and Stock')
+    expect(page).to have_link('Warehouses and Stock', href: root_path)
   end
 
   it 'and sees the registered warehouses' do
