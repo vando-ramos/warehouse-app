@@ -1,6 +1,6 @@
 <dl>
   <strong><dt>Code:</dt></strong>
-  <dd><%= order.code %></dd>
+  <dd><%= link_to order.code, order %></dd>
 
   <strong><dt>Destination warehouse:</dt></strong>
   <dd><%= order.warehouse.full_description %></dd>
