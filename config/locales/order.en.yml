@@ -1,0 +1,6 @@
+en:
+  activerecord:
+    models:
+      order:
+        one: order
+        other: orders

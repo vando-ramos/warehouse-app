@@ -1,15 +1,15 @@
 <h1>Search results for: <%= @code %></h1>
 
-<% if @order.present? %>
-  <p>1 order found</p>
+<% @orders.each do |order| %>
+  <p><%= @orders.count %> <%= Order.model_name.human(count: @orders.count) %> found</p>
   <dl>
     <dt>Code:</dt>
-    <dd><%= @order.code %></dd>
+    <dd><%= order.code %></dd>
 
     <dt>Destination warehouse:</dt>
-    <dd><%= @order.warehouse.full_description %></dd>
+    <dd><%= order.warehouse.full_description %></dd>
 
     <dt>Supplier:</dt>
-    <dd><%= @order.supplier.corporate_name %></dd>
+    <dd><%= order.supplier.corporate_name %></dd>
   </dl>
 <% end %>
