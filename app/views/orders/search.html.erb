@@ -2,14 +2,5 @@
 
 <% @orders.each do |order| %>
   <p><%= @orders.count %> <%= Order.model_name.human(count: @orders.count) %> found</p>
-  <dl>
-    <dt>Code:</dt>
-    <dd><%= order.code %></dd>
-
-    <dt>Destination warehouse:</dt>
-    <dd><%= order.warehouse.full_description %></dd>
-
-    <dt>Supplier:</dt>
-    <dd><%= order.supplier.corporate_name %></dd>
-  </dl>
+  <%= render order %>
 <% end %>
