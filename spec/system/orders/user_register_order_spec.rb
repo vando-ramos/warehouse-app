@@ -52,4 +52,30 @@ describe 'User register an order' do
     expect(page).not_to have_content('Porto Santos')
     expect(page).not_to have_content('Duff ltda')
   end
+
+  it "and doesn't inform the delivery date" do
+    # Arrange
+    user = User.create!(name: 'Dino', email: 'dino@email.com', password: '123456')
+
+    warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
+                                  address: 'Av do Aeroporto, 1000', cep: '15000-000',
+                                  description: 'Warehouse for international cargo')
+
+    supplier = Supplier.create!(corporate_name: 'Samsung ltda', brand_name: 'Samsung',
+                                registration_number: '123456789', address: 'Samsung Street, 100',
+                                city: 'Samsung City', state: 'SC', email: 'samsung@samsung.com')
+
+    # Act
+    login_as(user)
+    visit root_path
+    click_on 'Register Order'
+    select 'GRU - Aeroporto SP', from: 'Destination Warehouse'
+    select supplier.corporate_name, from: 'Supplier'
+    fill_in 'Expected Delivery Date', with: ''
+    click_on 'Save'
+
+    # Assert
+    expect(page).to have_content('Unable to register order')
+    expect(page).to have_content("Expected delivery date can't be blank")
+  end
 end

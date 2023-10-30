@@ -14,11 +14,11 @@ class ProductModelsController < ApplicationController
   def create
     @product_model = ProductModel.new(product_model_params)
 
-    if @product_model.save()
+    if @product_model.save
       redirect_to @product_model, notice: 'Product model registered successfully!'
     else
       @suppliers = Supplier.all
-      flash.now.notice = 'Unable to register product model!'
+      flash.now.alert = 'Unable to register product model!'
       render 'new'
     end
   end

@@ -15,10 +15,10 @@ class SuppliersController < ApplicationController
   def create
     @supplier = Supplier.new(supplier_params)
 
-    if @supplier.save()
+    if @supplier.save
       redirect_to suppliers_path, notice: 'Supplier registered successfully!'
     else
-      flash.now.notice = 'Unregistered supplier!'
+      flash.now.alert = 'Unregistered supplier!'
       render 'new'
     end
   end

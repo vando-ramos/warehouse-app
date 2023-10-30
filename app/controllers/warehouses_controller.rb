@@ -11,7 +11,7 @@ class WarehousesController < ApplicationController
   def create
     @warehouse = Warehouse.new(warehouse_params)
 
-    if @warehouse.save()
+    if @warehouse.save
       redirect_to root_path, notice: 'Warehouse registered successfully!'
     else
       flash.now.notice = 'Unregistered warehouse!'
