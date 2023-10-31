@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_params, only: %i[edit show update]
+  before_action :access_only_current_user, only: %i[edit show]
 
   def index
     @orders = current_user.orders
@@ -12,7 +14,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(orders_params)
+    @order = Order.new(order_params)
     @order.user = current_user
 
     if @order.save
@@ -26,10 +28,6 @@ class OrdersController < ApplicationController
   end
 
   def show
-    @order = Order.find(params[:id])
-    if @order.user != current_user
-      redirect_to root_path, alert: "You don't have access to this order!"
-    end
   end
 
   def search
@@ -37,9 +35,33 @@ class OrdersController < ApplicationController
     @orders = Order.where('code LIKE ?', "%#{@code}%")
   end
 
+  def edit
+    @warehouses = Warehouse.all
+    @suppliers = Supplier.all
+  end
+
+  def update
+    if @order.update(order_params)
+      redirect_to order_path(@order), notice: 'Order updated successfully!'
+    else
+      flash.now.alert = 'Unable to update the order!'
+      render 'edit'
+    end
+  end
+
   private
 
-  def orders_params
+  def set_params
+    @order = Order.find(params[:id])
+  end
+
+  def order_params
     params.require(:order).permit(:warehouse_id, :supplier_id, :expected_delivery_date)
+  end
+
+  def access_only_current_user
+    if @order.user != current_user
+      redirect_to root_path, alert: "You don't have access to this order!"
+    end
   end
 end

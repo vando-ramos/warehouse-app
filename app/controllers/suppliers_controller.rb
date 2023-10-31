@@ -30,7 +30,7 @@ class SuppliersController < ApplicationController
     if @supplier.update(supplier_params)
       redirect_to supplier_path(@supplier), notice: 'Supplier updated successfully!'
     else
-      flash.now.notice = 'Unable to update the supplier!'
+      flash.now.alert = 'Unable to update the supplier!'
       render 'edit'
     end
   end

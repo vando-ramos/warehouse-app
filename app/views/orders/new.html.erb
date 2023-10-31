@@ -9,20 +9,4 @@
   </ul>
 <% end %>
 
-<%= form_with model: @order do |f| %>
-  <div>
-    <%= f.label :warehouse_id, 'Destination Warehouse' %>
-    <%= f.collection_select :warehouse_id, @warehouses, :id, :full_description %>
-  </div>
-  <div>
-    <%= f.label :supplier_id, 'Supplier' %>
-    <%= f.collection_select :supplier_id, @suppliers, :id, :corporate_name %>
-  </div>
-  <div>
-    <%= f.label :expected_delivery_date, 'Expected Delivery Date' %>
-    <%= f.date_field :expected_delivery_date %>
-  </div>
-  <div>
-    <p><%= f.submit 'Save' %></p>
-  </div>
-<% end %>
+<%= render 'form' %>
