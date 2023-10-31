@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_params, only: %i[edit show update]
-  before_action :access_only_current_user, only: %i[edit show]
+  before_action :check_user, only: %i[edit show update]
 
   def index
     @orders = current_user.orders
@@ -59,9 +59,9 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:warehouse_id, :supplier_id, :expected_delivery_date)
   end
 
-  def access_only_current_user
+  def check_user
     if @order.user != current_user
-      redirect_to root_path, alert: "You don't have access to this order!"
+      return redirect_to root_path, alert: "You don't have access to this order!"
     end
   end
 end
