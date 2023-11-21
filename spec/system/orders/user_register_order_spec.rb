@@ -49,6 +49,7 @@ describe 'User register an order' do
     expect(page).to have_content('Supplier: Samsung ltda')
     expect(page).to have_content('Responsible User: Dino - dino@email.com')
     expect(page).to have_content('Expected Delivery Date: 2023-12-15')
+    expect(page).to have_content('Status: pending')
     expect(page).not_to have_content('Porto Santos')
     expect(page).not_to have_content('Duff ltda')
   end

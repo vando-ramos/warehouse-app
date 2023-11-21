@@ -25,9 +25,12 @@ describe 'User sees own orders' do
                                 registration_number: '123456789', address: 'Samsung Street, 100',
                                 city: 'Samsung City', state: 'SC', email: 'samsung@samsung.com')
 
-    order1 = Order.create!(user: user1, warehouse: warehouse, supplier: supplier, expected_delivery_date: 1.day.from_now)
-    order2 = Order.create!(user: user2, warehouse: warehouse, supplier: supplier, expected_delivery_date: 1.day.from_now)
-    order3 = Order.create!(user: user1, warehouse: warehouse, supplier: supplier, expected_delivery_date: 1.day.from_now)
+    order1 = Order.create!(user: user1, warehouse: warehouse, supplier: supplier,
+                            expected_delivery_date: 1.day.from_now, status: 'pending')
+    order2 = Order.create!(user: user2, warehouse: warehouse, supplier: supplier,
+                            expected_delivery_date: 1.day.from_now, status: 'delivered')
+    order3 = Order.create!(user: user1, warehouse: warehouse, supplier: supplier,
+                            expected_delivery_date: 1.day.from_now, status: 'canceled')
 
     # Act
     login_as(user1)
@@ -36,8 +39,11 @@ describe 'User sees own orders' do
 
     # Assert
     expect(page).to have_content(order1.code)
+    expect(page).to have_content('pending')
     expect(page).not_to have_content(order2.code)
+    expect(page).not_to have_content('delivered')
     expect(page).to have_content(order3.code)
+    expect(page).to have_content('canceled')
   end
 
   it 'and visits an order' do

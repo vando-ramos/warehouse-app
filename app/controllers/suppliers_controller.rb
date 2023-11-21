@@ -35,8 +35,6 @@ class SuppliersController < ApplicationController
     end
   end
 
-
-
   private
 
   def set_supplier

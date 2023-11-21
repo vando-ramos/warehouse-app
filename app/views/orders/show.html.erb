@@ -13,6 +13,9 @@
 
   <strong><dt>Expected Delivery Date:</dt></strong>
   <dd><%= @order.expected_delivery_date %></dd>
+
+  <strong><dt>Status:</dt></strong>
+  <dd><%= @order.status %></dd>
 </dl>
 
 <%= link_to 'Edit', edit_order_path %>
