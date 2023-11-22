@@ -99,4 +99,40 @@ describe 'User sees own orders' do
     expect(current_path).to eq(root_path)
     expect(page).to have_content("You don't have access to this order")
   end
+
+  it 'and see the order items' do
+    # Arrange
+    user = User.create!(name: 'Fran', email: 'fran@email.com', password: '654321')
+
+    warehouse = Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
+                                  address: 'Av do Aeroporto, 1000', cep: '15000-000',
+                                  description: 'Warehouse for international cargo')
+
+    supplier = Supplier.create!(corporate_name: 'Samsung ltda', brand_name: 'Samsung',
+                                registration_number: '123456789', address: 'Samsung Street, 100',
+                                city: 'Samsung City', state: 'SC', email: 'samsung@samsung.com')
+
+    pm1 = ProductModel.create!(name: 'Produto A', weight: '100', width: '6', height: '12',
+                        depth: '2', sku: 'CP-SAM-321', supplier: supplier)
+    pm2 = ProductModel.create!(name: 'Produto B', weight: '100', width: '6', height: '12',
+                        depth: '2', sku: 'CP-SAM-321', supplier: supplier)
+    pm3 = ProductModel.create!(name: 'Produto C', weight: '100', width: '6', height: '12',
+                        depth: '2', sku: 'CP-SAM-321', supplier: supplier)
+
+    order = Order.create!(user: user, warehouse: warehouse, supplier: supplier, expected_delivery_date: 1.day.from_now)
+
+    OrderItem.create!(product_model: pm1, order: order, quantity: 20)
+    OrderItem.create!(product_model: pm2, order: order, quantity: 15)
+
+    # Act
+    login_as(user)
+    visit root_path
+    click_on 'My Orders'
+    click_on order.code
+
+    # Assert
+    expect(page).to have_content('Order Items')
+    expect(page).to have_content('20x Produto A')
+    expect(page).to have_content('15x Produto B')
+  end
 end
