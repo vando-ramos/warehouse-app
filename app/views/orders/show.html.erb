@@ -20,14 +20,15 @@
 
 <h2>Order Items</h2>
 
+<p><%= link_to 'Add Item',  new_order_order_item_path(order_id: @order.id) %></p>
+<hr>
 <% @order.order_items.each do |item| %>
   <%= item.quantity %>x <%= item.product_model.name %>
 <% end %>
-
+<hr>
 <% if @order.pending? %>
-  <%= button_to 'Mark as delivered', delivered_order_path(@order.id) %>
-  <br>
+  <%= button_to 'Mark as delivered', delivered_order_path(@order.id) %>  
   <%= button_to 'Mark as canceled', canceled_order_path(@order.id) %>
 <% end %>
-<br>
-<%= link_to 'Edit', edit_order_path %>
+
+<p><%= link_to 'Edit', edit_order_path %></p>
