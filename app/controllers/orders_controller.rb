@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_params, only: %i[edit show update]
-  before_action :check_user, only: %i[edit show update]
+  before_action :set_order_and_check_user, only: %i[edit show update delivered canceled]
 
   def index
     @orders = current_user.orders
@@ -49,17 +48,25 @@ class OrdersController < ApplicationController
     end
   end
 
-  private
-
-  def set_params
-    @order = Order.find(params[:id])
+  def delivered
+    @order.delivered!
+    redirect_to @order
   end
+
+  def canceled
+    @order.canceled!
+    redirect_to @order
+  end
+
+  private
 
   def order_params
     params.require(:order).permit(:warehouse_id, :supplier_id, :expected_delivery_date)
   end
 
-  def check_user
+  def set_order_and_check_user
+    @order = Order.find(params[:id])
+
     if @order.user != current_user
       return redirect_to root_path, alert: "You don't have access to this order!"
     end

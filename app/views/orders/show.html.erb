@@ -18,4 +18,8 @@
   <dd><%= @order.status %></dd>
 </dl>
 
+<%= button_to 'Mark as delivered', delivered_order_path(@order.id) %>
+<br>
+<%= button_to 'Mark as canceled', canceled_order_path(@order.id) %>
+<br>
 <%= link_to 'Edit', edit_order_path %>
