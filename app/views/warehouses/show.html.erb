@@ -28,3 +28,10 @@
 <div>
   <p><%= button_to 'Delete', warehouse_path(@warehouse), method: :delete %></p>
 </div>
+
+<div>
+  <h2>Stock Items</h2>
+  <% @stocks.each_pair do |pm, quantity| %>
+    <%= quantity %>x <%= pm.sku %>    
+  <% end %>
+</div>
