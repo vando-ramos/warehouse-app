@@ -13,9 +13,13 @@ describe 'User updates order status' do
                                 registration_number: '123456789', address: 'Samsung Street, 100',
                                 city: 'Samsung City', state: 'SC', email: 'samsung@samsung.com')
 
-    order = Order.create!(user: user, warehouse: warehouse, supplier: supplier,
-                            expected_delivery_date: 1.day.from_now, status: 'pending')
+    product = ProductModel.create!(name: 'Produto A', weight: '100', width: '6', height: '12',
+                                  depth: '2', sku: 'CP-SAM-321', supplier: supplier)
 
+    order = Order.create!(user: user, warehouse: warehouse, supplier: supplier,
+                          expected_delivery_date: 1.day.from_now, status: 'pending')
+
+    OrderItem.create!(order: order, product_model: product, quantity: 10)
 
     # Act
     login_as(user)
@@ -27,6 +31,11 @@ describe 'User updates order status' do
     # Assert
     expect(current_path).to eq order_path(order.id)
     expect(page).to have_content('Status: delivered')
+    expect(page).not_to have_content('Mark as canceled')
+    expect(page).not_to have_content('Mark as delivered')
+    expect(StockProduct.count).to eq(10)
+    stock = StockProduct.where(product_model: product, warehouse: warehouse).count
+    expect(stock).to eq(10)
   end
 
   it 'and the order was canceled' do
@@ -41,9 +50,13 @@ describe 'User updates order status' do
                                 registration_number: '123456789', address: 'Samsung Street, 100',
                                 city: 'Samsung City', state: 'SC', email: 'samsung@samsung.com')
 
-    order = Order.create!(user: user, warehouse: warehouse, supplier: supplier,
-                            expected_delivery_date: 1.day.from_now, status: 'pending')
+    product = ProductModel.create!(name: 'Produto A', weight: '100', width: '6', height: '12',
+                                  depth: '2', sku: 'CP-SAM-321', supplier: supplier)
 
+    order = Order.create!(user: user, warehouse: warehouse, supplier: supplier,
+                          expected_delivery_date: 1.day.from_now, status: 'pending')
+
+    OrderItem.create!(order: order, product_model: product, quantity: 10)
 
     # Act
     login_as(user)
@@ -55,5 +68,6 @@ describe 'User updates order status' do
     # Assert
     expect(current_path).to eq order_path(order.id)
     expect(page).to have_content('Status: canceled')
+    expect(StockProduct.count).to eq(0)
   end
 end
