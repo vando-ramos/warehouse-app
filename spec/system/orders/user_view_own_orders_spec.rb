@@ -132,7 +132,7 @@ describe 'User sees own orders' do
 
     # Assert
     expect(page).to have_content('Order Items')
-    expect(page).to have_content('20x Produto A')
-    expect(page).to have_content('15x Produto B')
+    expect(page).to have_content('20 x Produto A')
+    expect(page).to have_content('15 x Produto B')
   end
 end

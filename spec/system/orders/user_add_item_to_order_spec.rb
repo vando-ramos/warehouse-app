@@ -32,7 +32,7 @@ describe 'User add items to order' do
     # Assert
     expect(current_path).to eq order_path(order.id)
     expect(page).to have_content('Item added successfully')
-    expect(page).to have_content('20x Produto A')
+    expect(page).to have_content('20 x Produto A')
   end
 
   it "and doesn't see products from another supplier" do

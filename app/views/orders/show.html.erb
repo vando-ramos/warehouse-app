@@ -23,7 +23,7 @@
 <p><%= link_to 'Add Item',  new_order_order_item_path(order_id: @order.id) %></p>
 <hr>
 <% @order.order_items.each do |item| %>
-  <%= item.quantity %>x <%= item.product_model.name %>
+  <%= item.quantity %> x <%= item.product_model.name %>
 <% end %>
 <hr>
 <% if @order.pending? %>

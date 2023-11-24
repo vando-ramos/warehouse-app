@@ -29,9 +29,36 @@
   <p><%= button_to 'Delete', warehouse_path(@warehouse), method: :delete %></p>
 </div>
 
-<div>
-  <h2>Stock Items</h2>
-  <% @stocks.each_pair do |pm, quantity| %>
-    <%= quantity %>x <%= pm.sku %>    
-  <% end %>
-</div>
+<section id='stock-items'>
+  <div>
+    <h2>Stock Items</h2>
+    <% @stocks.each_pair do |pm, quantity| %>
+      <%= quantity %> x <%= pm.sku %>
+    <% end %>
+  </div>
+</section>
+
+<section id='item-withdrawal'>
+  <div>
+    <h2>Item Withdrawal</h2>
+    <div class='withdrawal-form'>
+      <%= form_with url: warehouse_stock_product_destinations_path(@warehouse.id) do |f| %>
+        <div>
+          <%= f.label :product_model_id, 'Item Withdrawal' %>
+          <%= f.collection_select :product_model_id, @product_models, :id, :sku %>
+        </div>
+        <div>
+          <%= f.label :recipient %>
+          <%= f.text_field :recipient %>
+        </div>
+        <div>
+          <%= f.label :address, 'Destination Address' %>
+          <%= f.text_field :address %>
+        </div>
+        <div>
+          <%= f.submit 'Confirm Withdrawal' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
