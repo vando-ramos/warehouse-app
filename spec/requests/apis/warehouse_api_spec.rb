@@ -53,5 +53,61 @@ describe 'Warehouse API' do
       json_response = JSON.parse(response.body)
       expect(json_response).to eq([])
     end
+
+    it 'and raise an internal error' do
+      allow(Warehouse).to receive(:all).and_raise(ActiveRecord::QueryCanceled)
+
+      get '/api/v1/warehouses'
+
+      expect(response).to have_http_status(500)
+    end
+  end
+
+  context 'POST/api/v1/warehouses' do
+    it 'successfully' do
+      warehouse_params = { warehouse: { name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
+                          address: 'Av do Aeroporto, 1000', cep: '15000-000',
+                          description: 'Destinado a cargas internacionais' } }
+
+      post '/api/v1/warehouses', params: warehouse_params
+
+      expect(response).to have_http_status(201)
+      expect(response.content_type).to include('application/json')
+      json_response = JSON.parse(response.body)
+      expect(json_response['name']).to eq('Aeroporto SP')
+      expect(json_response['code']).to eq('GRU')
+      expect(json_response['city']).to eq('Guarulhos')
+      expect(json_response['area']).to eq(100_000)
+      expect(json_response['address']).to eq('Av do Aeroporto, 1000')
+      expect(json_response['cep']).to eq('15000-000')
+      expect(json_response['description']).to eq('Destinado a cargas internacionais')
+    end
+
+    it 'fail if parameters are not complete' do
+      warehouse_params = { warehouse: { name: 'Aeroporto SP', code: 'GRU' } }
+
+      post '/api/v1/warehouses', params: warehouse_params
+
+      expect(response).to have_http_status(412)
+      expect(response.body).not_to include("Name can't be blank")
+      expect(response.body).not_to include("Code can't be blank")
+      expect(response.body).to include("City can't be blank")
+      expect(response.body).to include("Area can't be blank")
+      expect(response.body).to include("Address can't be blank")
+      expect(response.body).to include("Cep can't be blank")
+      expect(response.body).to include("Description can't be blank")
+    end
+
+    it 'fails if there is an internal error' do
+      allow(Warehouse).to receive(:new).and_raise(ActiveRecord::ActiveRecordError)
+
+      warehouse_params = { warehouse: { name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: 100_000,
+                          address: 'Av do Aeroporto, 1000', cep: '15000-000',
+                          description: 'Destinado a cargas internacionais' } }
+
+      post '/api/v1/warehouses', params: warehouse_params
+
+      expect(response).to have_http_status(500)
+    end
   end
 end
