@@ -33,13 +33,15 @@ describe 'User register an order' do
 
     allow(SecureRandom).to receive(:alphanumeric).and_return('ABCD1234')
 
+    expected_date = 1.day.from_now.strftime('%Y-%m-%d')
+
     # Act
     login_as(user)
     visit root_path
     click_on 'Register Order'
     select 'GRU - Aeroporto SP', from: 'Destination Warehouse'
     select supplier.corporate_name, from: 'Supplier'
-    fill_in 'Expected Delivery Date', with: '2023-12-15'
+    fill_in 'Expected Delivery Date', with: expected_date
     click_on 'Save'
 
     # Assert
@@ -48,7 +50,7 @@ describe 'User register an order' do
     expect(page).to have_content('Destination Warehouse: GRU - Aeroporto SP')
     expect(page).to have_content('Supplier: Samsung ltda')
     expect(page).to have_content('Responsible User: Dino - dino@email.com')
-    expect(page).to have_content('Expected Delivery Date: 2023-12-15')
+    expect(page).to have_content("Expected Delivery Date: #{expected_date}")
     expect(page).to have_content('Status: pending')
     expect(page).not_to have_content('Porto Santos')
     expect(page).not_to have_content('Duff ltda')

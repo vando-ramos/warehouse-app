@@ -6,6 +6,9 @@ class ProductModelsController < ApplicationController
     @product_models = ProductModel.all
   end
 
+  def show
+  end
+
   def new
     @product_model = ProductModel.new
     @suppliers = Supplier.all
@@ -15,16 +18,13 @@ class ProductModelsController < ApplicationController
     @product_model = ProductModel.new(product_model_params)
 
     if @product_model.save
-      redirect_to @product_model, notice: 'Product model registered successfully!'
+      redirect_to product_model_path(@product_model), notice: 'Product model registered successfully!'
     else
       @suppliers = Supplier.all
       flash.now.alert = 'Unable to register product model!'
-      render 'new'
+      render :new
     end
-  end
-
-  def show
-  end
+  end  
 
   private
 

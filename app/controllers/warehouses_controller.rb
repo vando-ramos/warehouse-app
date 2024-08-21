@@ -17,7 +17,7 @@ class WarehousesController < ApplicationController
       redirect_to root_path, notice: 'Warehouse registered successfully!'
     else
       flash.now.notice = 'Unregistered warehouse!'
-      render 'new'
+      render :new
     end
   end
 
@@ -29,7 +29,7 @@ class WarehousesController < ApplicationController
       redirect_to warehouse_path(@warehouse), notice: 'Warehouse updated successfully!'
     else
       flash.now.notice = 'Unable to update the warehouse!'
-      render 'edit'
+      render :edit
     end
   end
 

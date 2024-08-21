@@ -6,6 +6,9 @@ class OrdersController < ApplicationController
     @orders = current_user.orders
   end
 
+  def show
+  end
+
   def new
     @order = Order.new
     @warehouses = Warehouse.all
@@ -17,22 +20,14 @@ class OrdersController < ApplicationController
     @order.user = current_user
 
     if @order.save
-      redirect_to @order, notice: 'Order registered successfully!'
+      redirect_to order_path(@order), notice: 'Order registered successfully!'
     else
       @warehouses = Warehouse.all
       @suppliers = Supplier.all
       flash.now.alert = 'Unable to register order'
       render :new
     end
-  end
-
-  def show
-  end
-
-  def search
-    @code = params['query']
-    @orders = Order.where('code LIKE ?', "%#{@code}%")
-  end
+  end   
 
   def edit
     @warehouses = Warehouse.all
@@ -44,8 +39,13 @@ class OrdersController < ApplicationController
       redirect_to order_path(@order), notice: 'Order updated successfully!'
     else
       flash.now.alert = 'Unable to update the order!'
-      render 'edit'
+      render :edit
     end
+  end
+
+  def search
+    @code = params['query']
+    @orders = Order.where('code LIKE ?', "%#{@code}%")
   end
 
   def delivered
@@ -57,12 +57,12 @@ class OrdersController < ApplicationController
       end
     end
 
-    redirect_to @order
+    redirect_to order_path(@order)
   end
 
   def canceled
     @order.canceled!
-    redirect_to @order
+    redirect_to order_path(@order)
   end
 
   private

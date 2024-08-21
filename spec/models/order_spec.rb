@@ -14,7 +14,7 @@ RSpec.describe Order, type: :model do
                                   registration_number: '123456789', address: 'Samsung Street, 100',
                                   city: 'Samsung City', state: 'SC', email: 'samsung@samsung.com')
 
-      order = Order.new(user: user, warehouse: warehouse, supplier: supplier, expected_delivery_date: '2023-12-10')
+      order = Order.new(user: user, warehouse: warehouse, supplier: supplier, expected_delivery_date: 1.day.from_now)
 
       # Act
       result = order.valid?
@@ -86,7 +86,7 @@ RSpec.describe Order, type: :model do
                                   registration_number: '123456789', address: 'Samsung Street, 100',
                                   city: 'Samsung City', state: 'SC', email: 'samsung@samsung.com')
 
-      order = Order.new(user: user, warehouse: warehouse, supplier: supplier, expected_delivery_date: '2023-12-10')
+      order = Order.new(user: user, warehouse: warehouse, supplier: supplier, expected_delivery_date: 1.day.from_now)
 
       # Act
       order.save!
@@ -109,8 +109,8 @@ RSpec.describe Order, type: :model do
                                   registration_number: '123456789', address: 'Samsung Street, 100',
                                   city: 'Samsung City', state: 'SC', email: 'samsung@samsung.com')
 
-      first_order = Order.create!(user: user, warehouse: warehouse, supplier: supplier, expected_delivery_date: '2023-12-10')
-      second_order = Order.new(user: user, warehouse: warehouse, supplier: supplier, expected_delivery_date: '2023-12-18')
+      first_order = Order.create!(user: user, warehouse: warehouse, supplier: supplier, expected_delivery_date: 1.day.from_now)
+      second_order = Order.new(user: user, warehouse: warehouse, supplier: supplier, expected_delivery_date: 1.day.from_now)
 
       # Act
       second_order.save!

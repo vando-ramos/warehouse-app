@@ -39,20 +39,22 @@ describe 'User edits an order' do
 
     order = Order.create!(user: user, warehouse: warehouse, supplier: supplier, expected_delivery_date: 1.day.from_now)
 
+    expected_date = 1.day.from_now.strftime('%Y-%m-%d')
+
     # Act
     login_as(user)
     visit root_path
     click_on 'My Orders'
     click_on order.code
     click_on 'Edit'
-    fill_in 'Expected Delivery Date', with: '2023-12-20'
+    fill_in 'Expected Delivery Date', with: expected_date
     select 'Samsung ltda', from: 'Supplier'
     click_on 'Save'
 
     # Assert
     expect(page).to have_content('Order updated successfully')
     expect(page).to have_content('Supplier: Samsung ltda')
-    expect(page).to have_content('Expected Delivery Date: 2023-12-20')
+    expect(page).to have_content("Expected Delivery Date: #{expected_date}")
   end
 
   it 'if is responsible for it' do

@@ -19,7 +19,7 @@ class SuppliersController < ApplicationController
       redirect_to suppliers_path, notice: 'Supplier registered successfully!'
     else
       flash.now.alert = 'Unregistered supplier!'
-      render 'new'
+      render :new
     end
   end
 
@@ -31,7 +31,7 @@ class SuppliersController < ApplicationController
       redirect_to supplier_path(@supplier), notice: 'Supplier updated successfully!'
     else
       flash.now.alert = 'Unable to update the supplier!'
-      render 'edit'
+      render :edit
     end
   end
 

@@ -10,7 +10,7 @@ class OrderItemsController < ApplicationController
   def create
     @order.order_items.create(order_item_params)
 
-    redirect_to @order, notice: 'Item added successfully!'
+    redirect_to order_path(@order), notice: 'Item added successfully!'
   end
 
   private
